@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en" >
+  <head>
+    <meta charset="UTF-8">
+    <title>ML Avatar Cropper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.css'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">    
+    <link rel='stylesheet' href="./css/prism.css">
+    <link rel="stylesheet" href="./css/cheatsheet.css">
+  </head>
+  <body>
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="columns">
+          <div class="column is-12">
+            <div class="container content">
+                <i class="is-large fab fa-python"></i>
+                <i class="is-large fab fa-node"></i>
+              <h1 class="title">ML Avatar Cropper</h1>
+              <h3 class="subtitle">
+                Documentation
+              </h3>
+              <a href="https://github.com/OberonStudios" target="_blank" class="button is-primary is-large">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>More on GitHub</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="columns">
+          <div class="column is-3">
+            <aside class="is-medium menu">
+              <ul class="menu-list">
+                <li><a href="#intro" class="is-active">Getting started</a></li>
+                <li><a href="#examples" class="is-active">Examples</a></li>
+                <li><a href="#demo" class="is-active">Demo</a></li>
+              </ul>
+            </aside>
+          </div>
+          <div class="column is-9">
+            <div class="content is-medium">
+          <h3 id="intro" class="title is-3">Getting Started</h3>
+              <div class="box">
+                <h4 id="const" class="title is-4">NodeJS</h4>
+                <p>First, get our NodeJS starting setup from GitHub.</p>
+                <pre><code class="language-javascript">$ git clone https://github.com/OberonStudios/ml-avatar-cropper-node</code></pre>
+                <p>This tutorial assumes that you already have both Python and Node installed on your system. Get in projects directory and install dependencies.</p>
+                <h4 id="const" class="title is-5">Python</h4>
+                <p>Dependencies are in <code>requirements.py</code>. You can install them in your environemt, however I reccomment to create another environment.</p>
+                <article class="message is-primary">
+                  <div class="message-body">
+                    The following guide assumes you use Python 3.6, Virtualenv, and Pip
+                  </div>
+                </article>
+              <pre><code class="language-javascript">$ virtualenv MY_ENV --python=python3.6</code><br/><code class="language-javascript">$ source activate &&  pip install -r requirements.txt</code></pre>
+              <br/>
+              <h4 id="const" class="title is-5">Node</h4>
+              <p>Install node dependencies with npm or yarn, and run server <code>node app.js</code>.</p>
+            </div>
+            <div class="box">
+                <h4 id="const" class="title is-4">Django</h4>
+                <p>First, get our Django starting setup from GitHub.</p>
+                <pre><code class="language-javascript">$ git clone https://github.com/OberonStudios/ml-avatar-cropper-django</code></pre>
+                <p>This tutorial assumes that you already have Python installed on your system. Get in projects directory and install dependencies.</p>
+                <h4 id="const" class="title is-5">Python</h4>
+                <p>Dependencies are in <code>requirements.py</code>. You can install them in your environemt, however I reccomment to create another environment.</p>
+                <article class="message is-primary">
+                  <div class="message-body">
+                    The following guide assumes you use Python 3.6, Virtualenv, and Pip
+                  </div>
+                </article>
+              <pre><code class="language-javascript">$ virtualenv MY_ENV --python=python3.6</code><br/><code class="language-javascript">$ source activate &&  pip install -r requirements.txt</code></pre>
+              <br/>
+              <h4 id="const" class="title is-5">Runserver</h4>
+              <pre><code class="language-javascript">(MY_ENV)$ python manage.py runserver</code></pre>
+              <p>More information on Django could be found below.</p>
+            </div>
+          </div> 
+
+          <div class="content is-medium">
+              <h3 id="examples" class="title is-3">Examples</h3>
+                  <div class="box">
+                    <h4 id="const" class="title is-4">Response to POST request in Django</h4>
+                    <p>
+                      Example of <code>views.py</code> fucntion that gets picture from post request, detects face, crops picture and returns avatar as jpeg.
+                    </p>
+                    <article class="message is-primary">
+                      <span class="icon has-text-primary">
+                      <i class="fab fa-python"></i>
+                      </span>
+                      <div class="message-body">
+                        Django 2.1 and Python 3.6 were used
+                      </div>
+                    </article>
+                  <pre><code class="language-javascript" >def index(request):
+    if request.method == 'POST' and request.FILES['myfile']:
+        myfile = request.FILES['myfile']
+
+        import face_recognition
+        from PIL import Image, ImageDraw
+
+        in_image = face_recognition.load_image_file(myfile)
+
+        out_image = Image.fromarray(in_image)
+        out_image_w, out_image_h = out_image.size
+    
+        face_locations = face_recognition.face_locations(in_image)
+
+        for (top, right, bottom, left) in face_locations:
+            out_image=out_image.crop((
+                left-(out_image_w*.1), 
+                top-(out_image_h*.17), 
+                right+(out_image_w*.1), 
+                bottom+(out_image_h*.2) ))
+
+        out_image.save("./output.jpeg")
+
+        image_data = open("./output.jpeg", "rb").read()
+        return HttpResponse(image_data, content_type="image/jpeg")
+
+    return render(request, 'src/html/image_upload.html')</code></pre>
+                </div>
+              </div>
+              <div class="content is-medium">
+                <h3 id="demo" class="title is-3">Demo</h3>
+                <div class="box">
+                  <h4 id="const" class="title is-3">Node example</h4>
+                  <p>Upload your picture below. If more then one face detected, only one of those is going to be croped.</p>
+                  <article class="message is-warning">
+                    <div class="message-body">
+                      Due to low-computational power of this server, current picture resolution is limited!
+                    </div>
+                  </article>
+                  <form action="/upload" enctype="multipart/form-data" method="POST">
+                    <div class="field">
+                      <div class="file has-name is-boxed">
+                        <label class="file-label">
+                          <input  onchange="uploadImg(this)" class="file-input" type="file" id="photo" name="photo">
+                          <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-camera-retro"></i>
+                            </span>
+                            <span id="btn-label" class="file-label">
+                              Choose Picture
+                            </span>
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                    </form>
+                  </div>
+                </div>
+  </div>
+</section>
+
+<footer class="footer">
+<div class="columns is-mobile is-centered">
+  <div class="field is-grouped is-grouped-multiline">
+    <div class="control">
+      <div class="tags has-addons"><a class="tag is-link" href="https://github.com/OberonStudios">Oberon Studios</a>
+    </div>
+  </div>
+  <div class="control">
+    <div class="tags has-addons">
+      <span class="tag is-dark"><a style="color:inherit;" href="https://aakatev.me">aakatev</a></span>
+    </div>
+  </div>
+</div>
+</div>
+
+</footer>
+<script charset="utf-8">
+    const uploadImg = (inputImg) => {
+        document.getElementById('btn-label').innerHTML = "Loading..."
+        inputImg.form.submit();
+    }
+
+
+</script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/prism/9000.0.1/prism.js'></script>
+<script>
+  window.addEventListener('resize', () => {
+  const divs = document.querySelectorAll(".menu-list");
+  if (window.innerWidth < 768){
+    divs.forEach(div => div.classList.add("tags"));
+  }
+  else {
+    divs.forEach(div => div.classList.remove("tags"));
+  }
+});
+</script>  
+</body>
+</html>

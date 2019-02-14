@@ -1,0 +1,20 @@
+{
+  "name": "aakatev.me",
+  "version": "1.0.0",
+  "description": "Node.js on Docker",
+  "author": "First Last <first.last@example.com>",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "ejs": "^2.6.1",
+    "express": "^4.16.1",
+    "express-ws": "^4.0.0",
+    "multer": "^1.4.1",
+    "python-shell": "^1.0.6",
+    "request": "^2.88.0",
+    "youtube-dl": "^1.12.2"
+  }
+}

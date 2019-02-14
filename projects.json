@@ -1,0 +1,25 @@
+[{
+        "id": "1",
+            "title": "Project One",
+                "details": "This is a sample project",
+                    "percentComplete": "20",
+                        "approved": "false"
+                          
+},
+{
+        "id": "2",
+            "title": "Project Twooooo",
+                "details": "This is a sample project",
+                    "percentComplete": "50",
+                        "approved": "true"
+                          
+},
+{
+        "id": "3",
+            "title": "Project Three",
+                "details": "This is a sample project",
+                    "percentComplete": "90",
+                        "approved": "false"
+                          
+}
+]
