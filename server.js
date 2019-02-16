@@ -132,17 +132,18 @@ const multerConfig = {
 
 app.post('/upload', multer(multerConfig).single('photo'), async function(req, res){
     // Get pic name
-    let pic_url = req.file.filename
+    let pic_url = req.file.filename;
+    let scale_hw = '.1';
     // Python shell config
     let options = {
-      args: [pic_url],
-      pythonPath: 'python3'
+      args: [pic_url, scale_hw],
+      pythonPath: 'python'
     };
 
     try {
       await ps.PythonShell.run(path.join(__dirname,'/showroom/avatar_cropper/ml.py'), options, function (err) {
         if (err) throw err;
-        res.render(path.join(__dirname,'/showroom/avatar_cropper/static/profile.ejs'), {pic_url: pic_url});
+        res.render(path.join(__dirname,'/showroom/avatar_cropper/static/profile.ejs'), { pic_url: pic_url });
       });
     } catch(e){
       console.log(e);

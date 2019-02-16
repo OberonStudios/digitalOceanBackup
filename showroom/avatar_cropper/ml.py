@@ -3,11 +3,10 @@ from PIL import Image, ImageDraw
 import sys
 import os
 
-SCALE_H = .1
-SCALE_W = .1
+SCALE_H = float(sys.argv[2])
+SCALE_W = float(sys.argv[2])
 
 my_file = str(sys.argv[1])
-# my_file='photo-1544979703428.jpeg'
 
 in_image = face_recognition.load_image_file('showroom/avatar_cropper/media/'+my_file)
 

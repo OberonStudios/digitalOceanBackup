@@ -7,15 +7,15 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <link rel="stylesheet" href="./css/profile.css">
-    <title>Hello, world!</title>
+    <title>Result | aakatev.me</title>
   </head>
   <body style="padding: 20px;">
     <div class="container"><div style="justify-content: center; padding: 50px; text-align: center;" class="row">
       <div class="col-lg-4">
-        <h2>Success!</h2>
+        <h2>Result!</h2>
         <img class="rounded-circle img-fluid" src="media/<%= pic_url %>" alt="Generic placeholder image" width="300" height="300">
         <h3>Pipeline</h3>
-        <p>First, Node saves photo, then calls Python script. Using ml, script calculates face coordinates, and picture gets cropped in Python. Finally, Node renderes new page with cropped photo.</p>
+        <p>First, Node server handles photo, and calls Python script. Using face recognition api, script calculates face coordinates, and also crops picture.</p>
         <p><a class="btn btn-secondary" href="/showroom/#demo" role="button">Try Again</a></p>
       </div>
       </div>
